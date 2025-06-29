@@ -21,14 +21,13 @@ import {
   Globe,
   Lock,
   Archive,
+  Sparkles,
+  Award,
+  Zap,
+  BarChart3,
+  ChevronRight
 } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-
-// Mock auth headers function
-const getAuthHeaders = () => ({
-  Authorization: "Bearer mock-token",
-  "Content-Type": "application/json",
-})
 
 export default function CourseList({ courses, onRefresh, onEditCourse }) {
   const [loading, setLoading] = useState(false)
@@ -137,7 +136,7 @@ export default function CourseList({ courses, onRefresh, onEditCourse }) {
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-100/50 to-purple-100/50 rounded-full blur-3xl"></div>
           <div className="relative bg-gradient-to-br from-slate-100 to-blue-50 rounded-3xl p-16 border border-white/50 shadow-2xl max-w-md mx-auto">
-            <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl mx-auto mb-8 flex items-center justify-center shadow-2xl">
+            <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl mx-auto mb-8 flex items-center justify-center shadow-2xl transform hover:rotate-6 transition-all duration-300">
               <BookOpen className="h-16 w-16 text-white" />
             </div>
             <h3 className="text-3xl font-bold text-slate-800 mb-4">No courses yet</h3>
@@ -155,52 +154,64 @@ export default function CourseList({ courses, onRefresh, onEditCourse }) {
     <div className="space-y-8">
       {/* Course Stats Header */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0 shadow-lg">
-          <CardContent className="p-4">
+        <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0 shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+          <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-blue-100 text-sm">Total Courses</p>
-                <p className="text-2xl font-bold">{courses.length}</p>
+                <p className="text-blue-100 text-sm mb-1">Total Courses</p>
+                <p className="text-3xl font-bold">{courses.length}</p>
+                <p className="text-blue-200 text-xs mt-2">Your educational portfolio</p>
               </div>
-              <BookOpen className="h-8 w-8 text-blue-200" />
+              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <BookOpen className="h-6 w-6 text-white" />
+              </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-green-500 to-emerald-600 text-white border-0 shadow-lg">
-          <CardContent className="p-4">
+        <Card className="bg-gradient-to-br from-green-500 to-emerald-600 text-white border-0 shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+          <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-green-100 text-sm">Published</p>
-                <p className="text-2xl font-bold">{courses.filter((c) => c.status === "published").length}</p>
+                <p className="text-green-100 text-sm mb-1">Published</p>
+                <p className="text-3xl font-bold">{courses.filter((c) => c.status === "published").length}</p>
+                <p className="text-green-200 text-xs mt-2">Live and accessible to learners</p>
               </div>
-              <Globe className="h-8 w-8 text-green-200" />
+              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <Globe className="h-6 w-6 text-white" />
+              </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-amber-500 to-orange-600 text-white border-0 shadow-lg">
-          <CardContent className="p-4">
+        <Card className="bg-gradient-to-br from-amber-500 to-orange-600 text-white border-0 shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+          <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-amber-100 text-sm">Drafts</p>
-                <p className="text-2xl font-bold">{courses.filter((c) => c.status === "draft").length}</p>
+                <p className="text-amber-100 text-sm mb-1">Drafts</p>
+                <p className="text-3xl font-bold">{courses.filter((c) => c.status === "draft").length}</p>
+                <p className="text-amber-200 text-xs mt-2">Works in progress</p>
               </div>
-              <FileText className="h-8 w-8 text-amber-200" />
+              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <FileText className="h-6 w-6 text-white" />
+              </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-purple-500 to-indigo-600 text-white border-0 shadow-lg">
-          <CardContent className="p-4">
+        <Card className="bg-gradient-to-br from-purple-500 to-indigo-600 text-white border-0 shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+          <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-purple-100 text-sm">Total Students</p>
-                <p className="text-2xl font-bold">
+                <p className="text-purple-100 text-sm mb-1">Total Students</p>
+                <p className="text-3xl font-bold">
                   {courses.reduce((acc, course) => acc + (course.enrolledCount || 0), 0)}
                 </p>
+                <p className="text-purple-200 text-xs mt-2">Learners enrolled in your courses</p>
               </div>
-              <Users className="h-8 w-8 text-purple-200" />
+              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <Users className="h-6 w-6 text-white" />
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -211,11 +222,18 @@ export default function CourseList({ courses, onRefresh, onEditCourse }) {
         {courses.map((course, index) => {
           const statusConfig = getStatusConfig(course.status)
           const isDeleting = deletingId === course._id || deletingId === course.id
+          const randomImage = [
+            "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=400",
+            "https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=400",
+            "https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=400",
+            "https://images.pexels.com/photos/5905885/pexels-photo-5905885.jpeg?auto=compress&cs=tinysrgb&w=400",
+            "https://images.pexels.com/photos/5905710/pexels-photo-5905710.jpeg?auto=compress&cs=tinysrgb&w=400"
+          ][index % 5];
 
           return (
             <Card
               key={course._id || course.id}
-              className="group relative overflow-hidden border-0 bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
+              className="group relative overflow-hidden border-0 bg-white/90 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] cursor-pointer rounded-2xl"
               style={{
                 animationDelay: `${index * 100}ms`,
                 animation: "fadeInUp 0.6s ease-out forwards",
@@ -238,9 +256,17 @@ export default function CourseList({ courses, onRefresh, onEditCourse }) {
               {/* Content */}
               <div className="relative">
                 {/* Course Header with Gradient Background */}
-                <div className={`relative h-40 bg-gradient-to-br ${getCategoryColor(course.category)} overflow-hidden`}>
+                <div className={`relative h-48 bg-gradient-to-br ${getCategoryColor(course.category)} overflow-hidden`}>
                   <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
-                  <div className="absolute inset-0 bg-[url('/placeholder.svg?height=160&width=400')] bg-cover bg-center opacity-20"></div>
+                  
+                  {/* Course Image */}
+                  <img 
+                    src={randomImage} 
+                    alt={course.title || "Course thumbnail"}
+                    className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+                  />
+                  
+                  <div className="absolute inset-0 bg-[url('/placeholder.svg?height=160&width=400')] bg-cover bg-center opacity-0"></div>
 
                   {/* Status Badge */}
                   <div className="absolute top-4 left-4">
@@ -259,7 +285,7 @@ export default function CourseList({ courses, onRefresh, onEditCourse }) {
                         <Button
                           size="sm"
                           variant="ghost"
-                          className="h-8 w-8 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0"
+                          className="h-8 w-8 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 rounded-lg"
                           disabled={loading || isDeleting}
                         >
                           <MoreHorizontal className="h-4 w-4" />
@@ -267,23 +293,23 @@ export default function CourseList({ courses, onRefresh, onEditCourse }) {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent
                         align="end"
-                        className="w-48 shadow-xl border-white/20 bg-white/95 backdrop-blur-xl"
+                        className="w-48 shadow-xl border-white/20 bg-white/95 backdrop-blur-xl rounded-xl"
                       >
                         <DropdownMenuItem
                           onClick={() => onEditCourse?.(course._id || course.id)}
-                          className="text-blue-700 hover:bg-blue-50 cursor-pointer"
+                          className="text-blue-700 hover:bg-blue-50 cursor-pointer rounded-lg my-1 font-medium"
                         >
                           <Edit className="h-4 w-4 mr-2" />
                           Edit Course
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="text-green-700 hover:bg-green-50 cursor-pointer">
+                        <DropdownMenuItem className="text-green-700 hover:bg-green-50 cursor-pointer rounded-lg my-1 font-medium">
                           <Eye className="h-4 w-4 mr-2" />
                           Preview
                         </DropdownMenuItem>
                         {course.status === "draft" ? (
                           <DropdownMenuItem
                             onClick={() => handleStatusChange(course._id || course.id, "published")}
-                            className="text-emerald-700 hover:bg-emerald-50 cursor-pointer"
+                            className="text-emerald-700 hover:bg-emerald-50 cursor-pointer rounded-lg my-1 font-medium"
                             disabled={loading}
                           >
                             <Globe className="h-4 w-4 mr-2" />
@@ -292,7 +318,7 @@ export default function CourseList({ courses, onRefresh, onEditCourse }) {
                         ) : course.status === "published" ? (
                           <DropdownMenuItem
                             onClick={() => handleStatusChange(course._id || course.id, "draft")}
-                            className="text-orange-700 hover:bg-orange-50 cursor-pointer"
+                            className="text-orange-700 hover:bg-orange-50 cursor-pointer rounded-lg my-1 font-medium"
                             disabled={loading}
                           >
                             <Lock className="h-4 w-4 mr-2" />
@@ -301,7 +327,7 @@ export default function CourseList({ courses, onRefresh, onEditCourse }) {
                         ) : null}
                         <DropdownMenuItem
                           onClick={() => handleDelete(course._id || course.id)}
-                          className="text-red-600 hover:bg-red-50 cursor-pointer"
+                          className="text-red-600 hover:bg-red-50 cursor-pointer rounded-lg my-1 font-medium"
                           disabled={loading || isDeleting}
                         >
                           <Trash2 className="h-4 w-4 mr-2" />
@@ -355,33 +381,49 @@ export default function CourseList({ courses, onRefresh, onEditCourse }) {
                   <div className="grid grid-cols-2 gap-4 pt-3 border-t border-slate-100">
                     <div className="space-y-2">
                       <div className="flex items-center gap-2 text-sm text-slate-600">
-                        <BookOpen className="h-4 w-4 text-blue-500" />
-                        <span className="font-medium">{course.modules?.length || course.lessonsCount || 0}</span>
-                        <span className="text-slate-500">lessons</span>
+                        <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                          <BookOpen className="h-4 w-4 text-blue-500" />
+                        </div>
+                        <div>
+                          <span className="font-medium">{course.modules?.length || course.lessonsCount || 0}</span>
+                          <span className="text-slate-500 ml-1">lessons</span>
+                        </div>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-slate-600">
-                        <Users className="h-4 w-4 text-green-500" />
-                        <span className="font-medium">{course.enrolledCount || 0}</span>
-                        <span className="text-slate-500">students</span>
+                        <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                          <Users className="h-4 w-4 text-green-500" />
+                        </div>
+                        <div>
+                          <span className="font-medium">{course.enrolledCount || 0}</span>
+                          <span className="text-slate-500 ml-1">students</span>
+                        </div>
                       </div>
                     </div>
 
                     <div className="space-y-2">
                       <div className="flex items-center gap-2 text-sm text-slate-600">
-                        <Calendar className="h-4 w-4 text-purple-500" />
-                        <span className="text-slate-500">
-                          {course.createdAt
-                            ? new Date(course.createdAt).toLocaleDateString()
-                            : course.updatedAt
-                              ? new Date(course.updatedAt).toLocaleDateString()
-                              : "Recently"}
-                        </span>
+                        <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                          <Calendar className="h-4 w-4 text-purple-500" />
+                        </div>
+                        <div>
+                          <span className="text-slate-500">
+                            {course.createdAt
+                              ? new Date(course.createdAt).toLocaleDateString()
+                              : course.updatedAt
+                                ? new Date(course.updatedAt).toLocaleDateString()
+                                : "Recently"}
+                          </span>
+                        </div>
                       </div>
                       {course.completionRate !== undefined && (
                         <div className="flex items-center gap-2 text-sm text-slate-600">
-                          <TrendingUp className="h-4 w-4 text-emerald-500" />
-                          <span className="font-medium">{course.completionRate}%</span>
-                          <span className="text-slate-500">completion</span>
+                          <div className="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center">
+                            <TrendingUp className="h-4 w-4 text-emerald-500" />
+                          </div>
+                          <div>
+                            <span className="font-medium">{course.completionRate}%</span>
+                            <span className="text-slate-500 ml-1">completion</span>
+                          </div>
                         </div>
                       )}
                     </div>
@@ -407,15 +449,15 @@ export default function CourseList({ courses, onRefresh, onEditCourse }) {
                   <div className="flex gap-2 pt-2">
                     <Button
                       onClick={() => onEditCourse?.(course._id || course.id)}
-                      className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 transition-all duration-300 hover:shadow-lg"
+                      className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 transition-all duration-300 hover:shadow-lg group"
                       disabled={loading || isDeleting}
                     >
-                      <Edit className="h-4 w-4 mr-2" />
+                      <Edit className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
                       Edit Course
                     </Button>
                     <Button
                       variant="outline"
-                      className="px-3 hover:bg-slate-50 border-slate-200 hover:border-slate-300 transition-all duration-300 bg-transparent"
+                      className="px-3 hover:bg-slate-50 border-slate-200 hover:border-slate-300 transition-all duration-300 bg-transparent rounded-xl"
                       disabled={loading || isDeleting}
                     >
                       <Eye className="h-4 w-4" />
