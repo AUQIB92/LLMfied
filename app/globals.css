@@ -266,10 +266,6 @@
   }
 
   /* Module content styling */
-  .module-content {
-    @apply prose prose-lg max-w-none;
-  }
-  
   .module-content h1,
   .module-content h2,
   .module-content h3 {
