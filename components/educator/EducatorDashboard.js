@@ -328,7 +328,6 @@ export default function EducatorDashboard() {
               className="group relative overflow-hidden border-0 bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
               style={{
                 animationDelay: `${index * 100}ms`,
-                animation: "fadeInUp 0.6s ease-out forwards",
               }}
             >
               {/* Gradient Border Effect */}
@@ -1330,17 +1329,6 @@ export default function EducatorDashboard() {
 
       {/* Add CSS for animations */}
       <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
         .line-clamp-2 {
           display: -webkit-box;
           -webkit-line-clamp: 2;
